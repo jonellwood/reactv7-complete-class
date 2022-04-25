@@ -1,15 +1,18 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
+import Carousel from "./Carousel";
 
 // this is not a function now - its a class. Pretty much no one uses this anymore
 // You can not useX with Class components
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = { loading: true };
-  }
+  //   this.state = { loading: true };
+  // }
+  // setting a class property below is much easier way. Need Babel to make this work
+  state = { loading: true };
 
   async componentDidMount() {
     const res = await fetch(
@@ -24,10 +27,11 @@ class Details extends Component {
       return <h2>Loading ..... </h2>;
     }
 
-    const { animal, city, state, description, name } = this.state;
+    const { animal, city, state, description, name, images } = this.state;
 
     return (
       <div className="details">
+        <Carousel images={images} />
         <div>
           <h1>{name}</h1>
           <h2>{`${animal} 🐾 ${city}, ${state} 🐾`}</h2>
