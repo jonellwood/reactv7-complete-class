@@ -8,10 +8,10 @@ class Carousel extends Component {
   static defaultProps = {
     images: ["http://pets-images.dev-apis.com/pets/none.jpg"],
   };
-
+  //   use arrow function here 👇 so a new execution context is not created. this makes "this" right
   handleIndexClick = (event) => {
     this.setState({
-      active: event.target.dataset.index,
+      active: +event.target.dataset.index, // adding the + makes it return a number
     });
   };
 

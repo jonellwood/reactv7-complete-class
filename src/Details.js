@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
+import ErrorBoundary from "./ErrorBoundary";
 
 // this is not a function now - its a class. Pretty much no one uses this anymore
 // You can not useX with Class components
@@ -46,6 +47,11 @@ class Details extends Component {
 // create a wrapping component so that we can use hooks
 const WrappedDetails = () => {
   const params = useParams();
-  return <Details params={params} />;
+  return (
+    // ErrorBoundary needs placed here. The error occurs in Details so the handler needs to the parent
+    <ErrorBoundary>
+      <Details params={params} />;
+    </ErrorBoundary>
+  );
 };
 export default WrappedDetails;
