@@ -2,6 +2,7 @@ import { Component } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
+import ThemeContext from "./ThemeContext";
 
 // this is not a function now - its a class. Pretty much no one uses this anymore
 // You can not useX with Class components
@@ -36,7 +37,13 @@ class Details extends Component {
         <div>
           <h1>{name}</h1>
           <h2>{`${animal} 🐾 ${city}, ${state} 🐾`}</h2>
-          <button>Adopt {name}</button>
+          {/* this is how you read in context in a class component */}
+          <ThemeContext.Consumer>
+            {([theme]) => (
+              <button style={{ backgroundColor: theme }}>Adopt {name}</button>
+            )}
+          </ThemeContext.Consumer>
+          {/* <button>Adopt {name}</button> */}
           <p>{description}</p>
         </div>
       </div>
